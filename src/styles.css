@@ -107,6 +107,11 @@ img {
   opacity: 1;
 }
 
+.nav a[aria-current='page'] {
+  color: var(--gold-bright);
+  opacity: 1;
+}
+
 .header-cta,
 .button {
   display: inline-flex;
@@ -607,6 +612,303 @@ h2 span {
   font-weight: 600;
 }
 
+.teachers-home {
+  display: grid;
+  grid-template-columns: 0.72fr 1.28fr;
+  gap: clamp(30px, 5vw, 72px);
+  align-items: center;
+  padding: 84px clamp(20px, 7vw, 104px);
+  background:
+    radial-gradient(circle at 84% 12%, rgba(214, 162, 58, 0.18), transparent 28%),
+    linear-gradient(180deg, #14120f, #070605);
+  border-bottom: 1px solid var(--line);
+}
+
+.teachers-home .section-head p:not(.section-kicker) {
+  color: rgba(247, 244, 234, 0.74);
+}
+
+.teachers-home .button {
+  margin-top: 20px;
+}
+
+.teacher-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.teacher-mini {
+  overflow: hidden;
+  border: 1px solid rgba(214, 162, 58, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.teacher-photo {
+  object-fit: cover;
+  filter: saturate(0.94) contrast(1.04);
+}
+
+.crop-jonas {
+  object-position: 50% 18%;
+}
+
+.crop-marlon {
+  object-position: 50% 24%;
+}
+
+.crop-andre {
+  object-position: 50% 12%;
+}
+
+.crop-silas {
+  object-position: 50% 18%;
+}
+
+.crop-sylvio {
+  object-position: 50% 12%;
+}
+
+.teacher-mini img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.teacher-mini div {
+  padding: 16px;
+}
+
+.teacher-mini h3 {
+  margin-bottom: 6px;
+  color: var(--paper);
+  font-family: Oswald, Impact, sans-serif;
+  font-size: clamp(18px, 1.55vw, 23px);
+  line-height: 1.04;
+  text-transform: uppercase;
+}
+
+.teacher-mini p {
+  color: var(--gold-bright);
+  font-family: Oswald, Impact, sans-serif;
+  font-size: clamp(14px, 1.15vw, 17px);
+  font-weight: 700;
+  line-height: 1.18;
+  text-transform: uppercase;
+}
+
+.teachers-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(420px, 1.12fr);
+  gap: clamp(34px, 6vw, 86px);
+  align-items: center;
+  min-height: 720px;
+  padding: 140px clamp(20px, 7vw, 104px) 84px;
+  background:
+    radial-gradient(circle at 78% 16%, rgba(214, 162, 58, 0.18), transparent 30%),
+    linear-gradient(180deg, #12110f, #050505);
+  overflow: hidden;
+}
+
+.teachers-hero h1 {
+  margin: 0 0 24px;
+  color: var(--gold-bright);
+  font-family: Oswald, Impact, sans-serif;
+  font-size: clamp(62px, 7vw, 112px);
+  font-weight: 700;
+  line-height: 0.9;
+  text-transform: uppercase;
+  text-shadow: 0 4px 0 rgba(138, 91, 31, 0.46), 0 20px 54px rgba(0, 0, 0, 0.36);
+}
+
+.teachers-hero h1 span {
+  display: block;
+  color: var(--paper);
+  font-size: 0.44em;
+}
+
+.teachers-hero p {
+  max-width: 640px;
+  color: rgba(247, 244, 234, 0.78);
+  font-size: clamp(18px, 1.8vw, 23px);
+  line-height: 1.56;
+}
+
+.teacher-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.teacher-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.teacher-hero-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba(214, 162, 58, 0.22);
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+}
+
+.teacher-model {
+  padding: 78px clamp(20px, 7vw, 104px);
+  background:
+    radial-gradient(circle at top left, rgba(214, 162, 58, 0.14), transparent 30%),
+    var(--paper);
+  color: var(--ink);
+}
+
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1060px;
+  margin: 42px auto 0;
+}
+
+.model-grid article {
+  padding: 28px;
+  border: 1px solid rgba(23, 21, 18, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.56);
+}
+
+.model-grid svg {
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.model-grid h3,
+.teacher-profile h3 {
+  margin-bottom: 10px;
+  font-family: Oswald, Impact, sans-serif;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.model-grid h3 {
+  font-size: 24px;
+}
+
+.model-grid p {
+  color: rgba(23, 21, 18, 0.72);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.teachers-directory {
+  padding: 86px clamp(20px, 7vw, 104px);
+  background: #080706;
+}
+
+.teacher-profile-list {
+  display: grid;
+  gap: 22px;
+  margin-top: 42px;
+}
+
+.teacher-profile {
+  display: grid;
+  grid-template-columns: minmax(250px, 340px) minmax(0, 1fr);
+  gap: clamp(20px, 3.5vw, 48px);
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(214, 162, 58, 0.22);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.teacher-profile:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 340px);
+}
+
+.teacher-profile:nth-child(even) img {
+  order: 2;
+}
+
+.teacher-profile > img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  align-self: center;
+  height: auto;
+  min-height: 0;
+}
+
+.teacher-profile-body {
+  align-self: center;
+  padding: 34px 34px 34px 0;
+}
+
+.teacher-profile:nth-child(even) .teacher-profile-body {
+  padding: 34px 0 34px 34px;
+}
+
+.teacher-profile h3 {
+  color: var(--paper);
+  font-size: clamp(34px, 4vw, 58px);
+}
+
+.teacher-profile p {
+  max-width: 830px;
+  color: rgba(247, 244, 234, 0.74);
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.teacher-profile .teacher-specialty {
+  display: grid;
+  gap: 4px;
+  max-width: 900px;
+  margin: 0 0 26px;
+  font-family: Oswald, Impact, sans-serif;
+  font-weight: 700;
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.teacher-name-mark,
+.teacher-teaches {
+  display: block;
+}
+
+.teacher-name-mark {
+  color: var(--paper);
+  font-size: clamp(30px, 3.15vw, 48px);
+}
+
+.teacher-teaches {
+  color: var(--gold-bright);
+  font-size: clamp(35px, 3.85vw, 62px);
+  text-shadow: 0 2px 0 rgba(138, 91, 31, 0.28);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.tag-list span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(214, 162, 58, 0.28);
+  border-radius: 5px;
+  color: var(--gold-bright);
+  background: rgba(214, 162, 58, 0.08);
+  font-family: Oswald, Impact, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .community-band {
   position: relative;
   display: grid;
@@ -706,6 +1008,11 @@ h2 span {
   background:
     linear-gradient(90deg, rgba(5, 5, 5, 0.94), rgba(5, 5, 5, 0.72)),
     url('/assets/community-workshop.png') center / cover;
+}
+
+.final-cta.compact {
+  padding-top: 68px;
+  padding-bottom: 68px;
 }
 
 .final-cta h2 {
@@ -850,10 +1157,35 @@ h2 span {
 
   .courses-section,
   .workshops-section,
+  .teachers-home,
   .community-band,
   .partners-section,
   .final-cta {
     grid-template-columns: 1fr;
+  }
+
+  .teacher-strip,
+  .model-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .teachers-hero {
+    grid-template-columns: 1fr;
+    padding-top: 124px;
+  }
+
+  .teacher-profile,
+  .teacher-profile:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .teacher-profile:nth-child(even) img {
+    order: 0;
+  }
+
+  .teacher-profile-body,
+  .teacher-profile:nth-child(even) .teacher-profile-body {
+    padding: 28px;
   }
 
   .community-band > img {
@@ -909,6 +1241,9 @@ h2 span {
   .route-section,
   .courses-section,
   .workshops-section,
+  .teachers-home,
+  .teacher-model,
+  .teachers-directory,
   .community-content,
   .partners-section,
   .final-cta {
@@ -920,10 +1255,43 @@ h2 span {
   .route-line,
   .course-grid,
   .topic-list,
+  .teacher-strip,
+  .model-grid,
   .community-points,
   .partner-list,
   .footer {
     grid-template-columns: 1fr;
+  }
+
+  .teachers-hero {
+    min-height: auto;
+    padding: 112px 20px 58px;
+  }
+
+  .teachers-hero h1 {
+    font-size: clamp(48px, 14vw, 58px);
+    line-height: 0.94;
+  }
+
+  .teacher-hero-actions {
+    flex-direction: column;
+  }
+
+  .teacher-hero-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .teacher-hero-grid img,
+  .teacher-hero-grid img:nth-child(1),
+  .teacher-hero-grid img:nth-child(2),
+  .teacher-hero-grid img:nth-child(n + 3) {
+    grid-column: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .teacher-profile > img {
+    width: 100%;
+    min-height: 0;
   }
 
   .route-line::before {

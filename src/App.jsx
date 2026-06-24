@@ -19,12 +19,12 @@ import {
 } from '@phosphor-icons/react';
 
 const navItems = [
-  ['A Rota', 'a-rota'],
-  ['Cursos', 'cursos'],
-  ['Workshops', 'workshops'],
-  ['Comunidade', 'comunidade'],
-  ['Eventos', 'workshops'],
-  ['Parceiros', 'parceiros'],
+  ['A Rota', '#a-rota'],
+  ['Cursos', '#cursos'],
+  ['Workshops', '#workshops'],
+  ['Professores', '/professores'],
+  ['Comunidade', '#comunidade'],
+  ['Parceiros', '#parceiros'],
 ];
 
 const audiences = [
@@ -116,29 +116,109 @@ const workshopTopics = [
 
 const partners = ['Tecno Car', 'MWH Performance', 'Garage 92', 'CCV'];
 
+const teachers = [
+  {
+    name: 'Jonas Santos',
+    specialty: 'Especialista em diagnóstico automotivo avançado',
+    shortSpecialty: 'Diagnóstico avançado',
+    image: '/assets/professores/jonas-portrait.jpeg',
+    alt: 'Professor Jonas Santos',
+    crop: 'crop-jonas',
+    formation: 'Técnico em mecânica, tecnólogo em mecatrônica e especialista em diagnóstico automotivo avançado.',
+    experience:
+      'Fundador da Tecnocar Injeção Eletrônica, atua no segmento de eletrônica automotiva com diagnósticos em sistemas modernos.',
+    contribution:
+      'Leva para a sala de aula uma didática objetiva, aplicada e alinhada às necessidades reais de mecânicos e eletricistas automotivos.',
+    tags: ['Injeção eletrônica', 'Rede CAN', 'Osciloscópio', 'Sensores e atuadores'],
+  },
+  {
+    name: 'Marlon Wagner Hey',
+    specialty: 'Especialista em gestão técnica, testes veiculares e Honda',
+    shortSpecialty: 'Gestão técnica e Honda',
+    image: '/assets/professores/marlon-portrait.jpeg',
+    alt: 'Professor Marlon Wagner Hey',
+    crop: 'crop-marlon',
+    formation: 'Profissional do setor automotivo desde 2002, com trajetória em montadoras e concessionárias.',
+    experience:
+      'Passou por Volkswagen, BMW, Volvo, Toyota, Kia, Fiat e Honda, somando vivência em testes, oficina e relacionamento com clientes.',
+    contribution:
+      'Instrutor técnico na Rota do Mecânico e proprietário da MWH Automotiva, oficina especializada em Honda.',
+    tags: ['Honda', 'Testes de veículos', 'Gestão de oficina', 'Atendimento técnico'],
+  },
+  {
+    name: 'André Luiz da Silva',
+    specialty: 'Especialista em mecânica prática e rotina de oficina',
+    shortSpecialty: 'Mecânica prática',
+    image: '/assets/professores/andre-portrait.jpeg',
+    alt: 'Professor André Luiz da Silva',
+    crop: 'crop-andre',
+    formation: 'Mais de 40 anos no setor de mecânica, com início aos 12 anos realizando reparos em motocicletas.',
+    experience:
+      'Construiu uma carreira acompanhando a evolução tecnológica do setor e consolidando uma base técnica reconhecida.',
+    contribution:
+      'Compartilha experiência prática para formar novos profissionais com comprometimento, qualidade e visão de oficina.',
+    tags: ['Mecânica geral', 'Motocicletas', 'Evolução técnica', 'Prática de oficina'],
+  },
+  {
+    name: 'Silas Arantes',
+    specialty: 'Especialista em mecânica de veículos e injeção para iniciantes',
+    shortSpecialty: 'Mecânica e injeção inicial',
+    image: '/assets/professores/silas-portrait.jpeg',
+    alt: 'Professor Silas Arantes',
+    crop: 'crop-silas',
+    formation:
+      'Profissional de reparação automotiva com experiência em suspensão, freios e diagnóstico de falhas em injeção eletrônica.',
+    experience:
+      'Desenvolveu conhecimentos técnicos voltados à identificação e solução de defeitos com foco em qualidade e eficiência.',
+    contribution:
+      'Ensina mecânica de veículos e injeção eletrônica de forma prática, didática e acessível para quem está começando.',
+    tags: ['Suspensão', 'Freios', 'Injeção eletrônica', 'Formação inicial'],
+  },
+  {
+    name: 'Sylvio Bove',
+    specialty: 'Especialista em sistemas elétricos e montagem técnica de motores',
+    shortSpecialty: 'Elétrica e motores',
+    image: '/assets/professores/sylvio-portrait.jpeg',
+    alt: 'Professor Sylvio Bove',
+    crop: 'crop-sylvio',
+    formation: 'Técnico em reparação automotiva, com sólida experiência em sistemas elétricos e injeção eletrônica.',
+    experience:
+      'Atua com diagnóstico, reparação e funcionamento dos principais sistemas automotivos, incluindo montagem técnica de motores.',
+    contribution:
+      'Fortalece a qualificação técnica de profissionais por meio do ensino prático e da troca de experiências de carreira.',
+    tags: ['Elétrica automotiva', 'Montagem de motores', 'Diagnóstico', 'Reparação técnica'],
+  },
+];
+
 function Brand() {
   return (
-    <a className="brand" href="#top" aria-label="Rota do Mecânico">
+    <a className="brand" href="/" aria-label="Rota do Mecânico">
       <span>Rota</span>
       <strong>do Mecânico</strong>
     </a>
   );
 }
 
-function Header() {
+function Header({ isTeachersPage = false }) {
   const [open, setOpen] = useState(false);
+  const contactHref = isTeachersPage ? '/#contato' : '#contato';
 
   return (
     <header className="site-header">
       <Brand />
       <nav className={open ? 'nav is-open' : 'nav'} aria-label="Navegação principal">
-        {navItems.map(([item, target]) => (
-          <a key={item} href={`#${target}`} onClick={() => setOpen(false)}>
+        {navItems.map(([item, href]) => (
+          <a
+            key={item}
+            href={isTeachersPage && href.startsWith('#') ? `/${href}` : href}
+            onClick={() => setOpen(false)}
+            aria-current={href === '/professores' && isTeachersPage ? 'page' : undefined}
+          >
             {item}
           </a>
         ))}
       </nav>
-      <a className="header-cta" href="#contato">
+      <a className="header-cta" href={contactHref}>
         Falar com a equipe
       </a>
       <button className="menu-button" type="button" onClick={() => setOpen((value) => !value)} aria-label="Abrir menu">
@@ -333,6 +413,38 @@ function WorkshopsSection() {
   );
 }
 
+function TeachersHomeSection() {
+  return (
+    <section className="teachers-home" id="professores-home">
+      <div className="section-head dark">
+        <p className="section-kicker">Professores da Rota</p>
+        <h2>
+          Quem ensina
+          <span>vive a oficina.</span>
+        </h2>
+        <p>
+          Um time formado por especialistas em diagnóstico, elétrica, injeção, motores,
+          gestão técnica e formação de novos reparadores.
+        </p>
+        <a className="button secondary" href="/professores">
+          Conhecer professores
+        </a>
+      </div>
+      <div className="teacher-strip" aria-label="Corpo docente da Rota do Mecânico">
+        {teachers.slice(0, 5).map((teacher) => (
+          <article className="teacher-mini" key={teacher.name}>
+            <img className={`teacher-photo ${teacher.crop}`} src={teacher.image} alt={teacher.alt} />
+            <div>
+              <h3>{teacher.name}</h3>
+              <p>Especialista em {teacher.shortSpecialty}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function CommunitySection() {
   return (
     <section className="community-band" id="comunidade">
@@ -386,7 +498,7 @@ function PartnersSection() {
   );
 }
 
-function FinalCta() {
+function FinalCta({ compact = false }) {
   const [sent, setSent] = useState(false);
 
   function handleSubmit(event) {
@@ -395,7 +507,7 @@ function FinalCta() {
   }
 
   return (
-    <section className="final-cta" id="contato">
+    <section className={compact ? 'final-cta compact' : 'final-cta'} id="contato">
       <div>
         <h2>
           Escolha sua rota e faça parte
@@ -442,6 +554,106 @@ function FinalCta() {
   );
 }
 
+function TeachersPage() {
+  return (
+    <>
+      <Header isTeachersPage />
+      <main>
+        <section className="teachers-hero">
+          <div>
+            <h1>
+              Professores
+              <span>e especializações</span>
+            </h1>
+            <p>
+              A Rota do Mecânico reúne instrutores com vivência real em oficina, montadoras,
+              concessionárias e centros de diagnóstico para transformar experiência técnica
+              em formação prática.
+            </p>
+            <div className="teacher-hero-actions">
+              <a className="button primary" href="#perfis">
+                Ver perfis
+              </a>
+              <a className="button secondary" href="/#cursos">
+                Ver cursos
+              </a>
+            </div>
+          </div>
+          <div className="teacher-hero-grid" aria-label="Fotos dos professores">
+            {teachers.map((teacher) => (
+              <img className={`teacher-photo ${teacher.crop}`} key={teacher.name} src={teacher.image} alt={teacher.alt} />
+            ))}
+          </div>
+        </section>
+
+        <section className="teacher-model">
+          <div className="section-head centered">
+            <p className="section-kicker">Modelo de formação</p>
+            <h2>
+              Experiência de mercado
+              <span>organizada para a prática.</span>
+            </h2>
+            <p>
+              Cada professor entra na jornada com uma frente técnica clara, criando uma trilha
+              de aprendizagem que conecta base, diagnóstico, sistemas e rotina de oficina.
+            </p>
+          </div>
+          <div className="model-grid">
+            <article>
+              <BookOpenText size={34} weight="duotone" />
+              <h3>Base técnica</h3>
+              <p>Fundamentos ensinados com linguagem acessível para quem está começando.</p>
+            </article>
+            <article>
+              <Gauge size={34} weight="duotone" />
+              <h3>Diagnóstico aplicado</h3>
+              <p>Método para testar, interpretar falhas e tomar decisões com segurança.</p>
+            </article>
+            <article>
+              <Wrench size={34} weight="duotone" />
+              <h3>Vivência de oficina</h3>
+              <p>Casos reais, processos de reparação e repertório técnico de quem atua no mercado.</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="teachers-directory" id="perfis">
+          <div className="section-head">
+            <p className="section-kicker">Corpo docente</p>
+            <h2>
+              Especialistas
+              <span>da Rota do Mecânico.</span>
+            </h2>
+          </div>
+          <div className="teacher-profile-list">
+            {teachers.map((teacher) => (
+              <article className="teacher-profile" key={teacher.name}>
+                <img className={`teacher-photo ${teacher.crop}`} src={teacher.image} alt={teacher.alt} />
+                <div className="teacher-profile-body">
+                  <p className="teacher-specialty">
+                    <span className="teacher-name-mark">Professor {teacher.name}</span>
+                    <span className="teacher-teaches">{teacher.specialty.toLowerCase()}.</span>
+                  </p>
+                  <p>{teacher.formation}</p>
+                  <p>{teacher.experience}</p>
+                  <p>{teacher.contribution}</p>
+                  <div className="tag-list">
+                    {teacher.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+        <FinalCta compact />
+      </main>
+      <Footer />
+    </>
+  );
+}
+
 function Footer() {
   return (
     <footer className="footer">
@@ -463,6 +675,12 @@ function Footer() {
 }
 
 export function App() {
+  const isTeachersPage = window.location.pathname.replace(/\/$/, '') === '/professores';
+
+  if (isTeachersPage) {
+    return <TeachersPage />;
+  }
+
   return (
     <>
       <Header />
@@ -472,6 +690,7 @@ export function App() {
         <RoutesSection />
         <CoursesSection />
         <WorkshopsSection />
+        <TeachersHomeSection />
         <CommunitySection />
         <PartnersSection />
         <FinalCta />
