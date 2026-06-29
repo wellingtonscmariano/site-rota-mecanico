@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
 import {
+  ArrowRight,
   BookOpenText,
   Briefcase,
   CalendarCheck,
   CaretDown,
   ChartLineUp,
+  CheckCircle,
   Clock,
   Gauge,
   Handshake,
@@ -31,18 +33,22 @@ const audiences = [
   {
     title: 'Quem quer entrar',
     text: 'Para quem está começando e quer aprender do zero com apoio e direção.',
+    image: '/assets/course-diagnostics.png',
   },
   {
     title: 'Transição de carreira',
     text: 'Para quem busca uma nova rota e vê na mecânica uma carreira possível.',
+    image: '/assets/community-workshop.png',
   },
   {
     title: 'Profissionais de oficina',
     text: 'Para quem já trabalha e precisa se atualizar com novas tecnologias.',
+    image: '/assets/hero-workshop.png',
   },
   {
     title: 'Oficinas parceiras',
     text: 'Para empresas que buscam profissionais preparados e conexões com talentos.',
+    image: '/assets/community-workshop.png',
   },
 ];
 
@@ -75,7 +81,9 @@ const courses = [
     title: 'Diagnóstico Avançado Completo',
     hours: '27 horas',
     level: 'Intermediário / Avançado',
+    format: 'Presencial e prático',
     category: 'avancado',
+    image: '/assets/course-diagnostics.png',
     text: 'Método e segurança para interpretar falhas com mais precisão.',
   },
   {
@@ -83,7 +91,9 @@ const courses = [
     title: 'Multímetro',
     hours: '10 horas',
     level: 'Iniciante',
+    format: 'Base técnica',
     category: 'base',
+    image: '/assets/hero-workshop.png',
     text: 'Base essencial para medições, testes e diagnóstico elétrico.',
   },
   {
@@ -91,7 +101,9 @@ const courses = [
     title: 'Injeção Eletrônica',
     hours: '120 horas',
     level: 'Intermediário',
+    format: 'Presencial e prático',
     category: 'base',
+    image: '/assets/community-workshop.png',
     text: 'Fundamentos e prática para entender sistemas modernos de alimentação e controle.',
   },
   {
@@ -99,7 +111,9 @@ const courses = [
     title: 'Rede CAN na Prática',
     hours: '20 horas',
     level: 'Intermediário',
+    format: 'Workshop prático',
     category: 'workshop',
+    image: '/assets/course-diagnostics.png',
     text: 'Diagnóstico de comunicação automotiva para veículos modernos.',
   },
 ];
@@ -115,6 +129,41 @@ const workshopTopics = [
 ];
 
 const partners = ['Tecno Car', 'MWH Performance', 'Garage 92', 'CCV'];
+
+const trustItems = [
+  'Instrutores que vivem a rotina de oficina',
+  'Conteúdo aplicado em bancada, diagnóstico e sistemas reais',
+  'Comunidade para continuar aprendendo depois da aula',
+  'Conexão com oficinas e empresas do setor automotivo',
+];
+
+const faqItems = [
+  {
+    question: 'Os cursos são presenciais?',
+    answer:
+      'A proposta principal da Rota é o aprendizado presencial e prático, com contato direto com instrutores, ferramentas e rotina de oficina.',
+  },
+  {
+    question: 'Preciso ter experiência para começar?',
+    answer:
+      'Não. Existem rotas para iniciantes, pessoas em transição de carreira e profissionais que já atuam e querem se atualizar.',
+  },
+  {
+    question: 'Como funcionam os workshops?',
+    answer:
+      'Os workshops são encontros técnicos focados em temas atuais, com aplicação imediata e linguagem direta para quem precisa resolver problemas reais.',
+  },
+  {
+    question: 'A Rota promete emprego?',
+    answer:
+      'Não há promessa de emprego garantido. A Rota aproxima alunos do mercado por meio de preparo técnico, networking e parceiros.',
+  },
+  {
+    question: 'Como faço para falar com a equipe?',
+    answer:
+      'Use o formulário de interesse no fim da página. A equipe pode orientar sobre cursos, workshops, comunidade e próximos passos.',
+  },
+];
 
 const teachers = [
   {
@@ -202,11 +251,12 @@ function Brand() {
 function Header({ isTeachersPage = false }) {
   const [open, setOpen] = useState(false);
   const contactHref = isTeachersPage ? '/#contato' : '#contato';
+  const menuLabel = open ? 'Fechar menu' : 'Abrir menu';
 
   return (
     <header className="site-header">
       <Brand />
-      <nav className={open ? 'nav is-open' : 'nav'} aria-label="Navegação principal">
+      <nav id="primary-navigation" className={open ? 'nav is-open' : 'nav'} aria-label="Navegação principal">
         {navItems.map(([item, href]) => (
           <a
             key={item}
@@ -221,7 +271,14 @@ function Header({ isTeachersPage = false }) {
       <a className="header-cta" href={contactHref}>
         Falar com a equipe
       </a>
-      <button className="menu-button" type="button" onClick={() => setOpen((value) => !value)} aria-label="Abrir menu">
+      <button
+        className="menu-button"
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-controls="primary-navigation"
+        aria-expanded={open}
+        aria-label={menuLabel}
+      >
         {open ? <X size={24} weight="bold" /> : <List size={24} weight="bold" />}
       </button>
     </header>
@@ -232,7 +289,7 @@ function Hero() {
   return (
     <section className="hero" id="top">
       <div className="hero-media" aria-hidden="true">
-        <img src="/assets/hero-workshop.png" alt="" />
+        <img src="/assets/hero-workshop.png" alt="" fetchPriority="high" />
       </div>
       <div className="hero-content">
         <h1>
@@ -246,6 +303,7 @@ function Hero() {
         <div className="hero-actions">
           <a className="button primary" href="#rotas">
             Quero encontrar minha rota
+            <ArrowRight size={18} weight="bold" aria-hidden="true" />
           </a>
           <a className="button secondary" href="#cursos">
             Ver cursos e workshops
@@ -290,7 +348,7 @@ function CommunityIntro() {
       <div className="audience-grid">
         {audiences.map((audience) => (
           <article className="audience-card" key={audience.title}>
-            <img src="/assets/course-diagnostics.png" alt="" />
+            <img src={audience.image} alt="" loading="lazy" />
             <div>
               <h3>{audience.title}</h3>
               <p>{audience.text}</p>
@@ -356,6 +414,7 @@ function CoursesSection() {
               type="button"
               key={value}
               onClick={() => setFilter(value)}
+              aria-pressed={filter === value}
             >
               {label}
             </button>
@@ -365,7 +424,7 @@ function CoursesSection() {
       <div className="course-grid">
         {filtered.map((course) => (
           <article className="course-card" key={course.title}>
-            <img src="/assets/course-diagnostics.png" alt="" />
+            <img src={course.image} alt="" loading="lazy" />
             <div className="course-body">
               <span>{course.type}</span>
               <h3>{course.title}</h3>
@@ -381,8 +440,16 @@ function CoursesSection() {
                   <dt>Nível</dt>
                   <dd>{course.level}</dd>
                 </div>
+                <div>
+                  <CheckCircle size={16} weight="bold" />
+                  <dt>Formato</dt>
+                  <dd>{course.format}</dd>
+                </div>
               </dl>
-              <a href="#contato">Saiba mais</a>
+              <a href="#contato" aria-label={`Quero saber mais sobre ${course.title}`}>
+                Quero saber mais
+                <ArrowRight size={16} weight="bold" aria-hidden="true" />
+              </a>
             </div>
           </article>
         ))}
@@ -433,7 +500,7 @@ function TeachersHomeSection() {
       <div className="teacher-strip" aria-label="Corpo docente da Rota do Mecânico">
         {teachers.slice(0, 5).map((teacher) => (
           <article className="teacher-mini" key={teacher.name}>
-            <img className={`teacher-photo ${teacher.crop}`} src={teacher.image} alt={teacher.alt} />
+            <img className={`teacher-photo ${teacher.crop}`} src={teacher.image} alt={teacher.alt} loading="lazy" />
             <div>
               <h3>{teacher.name}</h3>
               <p>Especialista em {teacher.shortSpecialty}</p>
@@ -476,7 +543,7 @@ function CommunitySection() {
           </div>
         </div>
       </div>
-      <img src="/assets/community-workshop.png" alt="Grupo da Rota do Mecânico em oficina técnica" />
+      <img src="/assets/community-workshop.png" alt="Grupo da Rota do Mecânico em oficina técnica" loading="lazy" />
     </section>
   );
 }
@@ -485,13 +552,69 @@ function PartnersSection() {
   return (
     <section className="partners-section" id="parceiros">
       <div>
-        <p className="section-kicker">Parceiros que</p>
+        <p className="section-kicker">Parceiros e prova de realidade</p>
         <h2>Fazem parte da Rota</h2>
-        <p>Oficinas e empresas que acreditam na formação de profissionais cada vez mais preparados.</p>
+        <p>
+          Oficinas e empresas que acreditam na formação de profissionais cada vez mais
+          preparados, com conexão entre sala, bancada e mercado.
+        </p>
       </div>
-      <div className="partner-list">
-        {partners.map((partner) => (
-          <span key={partner}>{partner}</span>
+      <div className="partners-content">
+        <div className="partner-list">
+          {partners.map((partner) => (
+            <span key={partner}>{partner}</span>
+          ))}
+        </div>
+        <div className="trust-list" aria-label="Diferenciais de confiança">
+          {trustItems.map((item) => (
+            <div key={item}>
+              <CheckCircle size={19} weight="fill" />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ManifestoSection() {
+  return (
+    <section className="manifesto-section" id="manifesto">
+      <div>
+        <p>A mecânica vai muito além das ferramentas.</p>
+        <h2>
+          Ela transforma vidas,
+          <span>abre oportunidades e constrói futuro.</span>
+        </h2>
+      </div>
+      <p>
+        A Rota organiza esse caminho em uma comunidade que une cursos, workshops,
+        encontros, grupos de estudo e conexões com oficinas parceiras.
+      </p>
+    </section>
+  );
+}
+
+function FaqSection() {
+  return (
+    <section className="faq-section" id="faq">
+      <div className="section-head">
+        <p className="section-kicker">Perguntas frequentes</p>
+        <h2>
+          Antes de escolher
+          <span>sua rota.</span>
+        </h2>
+      </div>
+      <div className="faq-list">
+        {faqItems.map((item, index) => (
+          <details key={item.question} open={index === 0}>
+            <summary>
+              <span>{item.question}</span>
+              <CaretDown size={18} weight="bold" aria-hidden="true" />
+            </summary>
+            <p>{item.answer}</p>
+          </details>
         ))}
       </div>
     </section>
@@ -500,6 +623,7 @@ function PartnersSection() {
 
 function FinalCta({ compact = false }) {
   const [sent, setSent] = useState(false);
+  const coursesHref = compact ? '/#cursos' : '#cursos';
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -515,20 +639,28 @@ function FinalCta({ compact = false }) {
         </h2>
         <p>Fale com a equipe, tire suas dúvidas e descubra o próximo passo da sua jornada.</p>
         <div className="cta-actions">
-          <a className="button primary" href="https://wa.me/" target="_blank" rel="noreferrer">
+          <a className="button primary" href="#lead-form">
             <WhatsappLogo size={20} weight="bold" />
             Falar com a equipe
           </a>
-          <a className="button secondary" href="#cursos">
+          <a className="button secondary" href={coursesHref}>
             Ver cursos
           </a>
         </div>
       </div>
-      <form className="lead-form" onSubmit={handleSubmit}>
+      <form className="lead-form" id="lead-form" onSubmit={handleSubmit}>
         <h3>Entrar na lista de interesse</h3>
         <label>
           Nome
           <input name="nome" placeholder="Seu nome" required />
+        </label>
+        <label>
+          E-mail
+          <input name="email" type="email" placeholder="voce@email.com" required />
+        </label>
+        <label>
+          WhatsApp
+          <input name="whatsapp" type="tel" placeholder="(00) 00000-0000" inputMode="tel" />
         </label>
         <label>
           Interesse
@@ -540,13 +672,17 @@ function FinalCta({ compact = false }) {
           </select>
           <CaretDown size={18} weight="bold" aria-hidden="true" />
         </label>
+        <label>
+          Conte um pouco sobre seu objetivo
+          <textarea name="objetivo" placeholder="Quero começar do zero, me atualizar, levar treinamento para oficina..." />
+        </label>
         <button className="button primary" type="submit">
           Enviar interesse
         </button>
         {sent && (
-          <p className="form-success">
+          <p className="form-success" role="status" aria-live="polite">
             <ShieldCheck size={18} weight="fill" />
-            Interesse registrado para demonstração.
+            Interesse registrado. A próxima etapa é o contato da equipe.
           </p>
         )}
       </form>
@@ -558,7 +694,7 @@ function TeachersPage() {
   return (
     <>
       <Header isTeachersPage />
-      <main>
+      <main id="main-content">
         <section className="teachers-hero">
           <div>
             <h1>
@@ -678,13 +814,23 @@ export function App() {
   const isTeachersPage = window.location.pathname.replace(/\/$/, '') === '/professores';
 
   if (isTeachersPage) {
-    return <TeachersPage />;
+    return (
+      <>
+        <a className="skip-link" href="#main-content">
+          Ir para o conteúdo
+        </a>
+        <TeachersPage />
+      </>
+    );
   }
 
   return (
     <>
+      <a className="skip-link" href="#main-content">
+        Ir para o conteúdo
+      </a>
       <Header />
-      <main>
+      <main id="main-content">
         <Hero />
         <CommunityIntro />
         <RoutesSection />
@@ -693,6 +839,8 @@ export function App() {
         <TeachersHomeSection />
         <CommunitySection />
         <PartnersSection />
+        <ManifestoSection />
+        <FaqSection />
         <FinalCta />
       </main>
       <Footer />
