@@ -167,10 +167,29 @@ const workshopTopics = [
 
 const partners = [
   { name: 'TecnoCar', logo: '/assets/parceiros/tecnocar.png', tone: 'dark' },
-  { name: 'MWH Automotiva', logo: '/assets/parceiros/mwh.png', tone: 'dark' },
+  { name: 'MWH Automotiva', logo: '/assets/parceiros/mwh.webp', tone: 'dark' },
   { name: 'Garage 92', logo: '/assets/parceiros/garage92.png', tone: 'light' },
   { name: 'CCV Chevrolet', logo: '/assets/parceiros/ccv.png', tone: 'light' },
 ];
+
+const heroImageBase = {
+  '/assets/hero-workshop.png': 'hero-workshop',
+  '/assets/course-diagnostics.png': 'course-diagnostics',
+  '/assets/community-workshop.png': 'community-workshop',
+};
+
+function heroSrcSet(path) {
+  const base = heroImageBase[path];
+  return {
+    src: `/assets/${base}-1600.webp`,
+    srcSet: `/assets/${base}-800.webp 800w, /assets/${base}-1600.webp 1600w`,
+    sizes: '100vw',
+  };
+}
+
+function cardSrc(path) {
+  return `/assets/${heroImageBase[path]}-800.webp`;
+}
 
 const whatsappPhone = '5541998741990';
 
@@ -759,7 +778,7 @@ const teachers = [
     name: 'Jonas Santos',
     specialty: 'Especialista em diagnóstico automotivo avançado',
     shortSpecialty: 'Diagnóstico avançado',
-    image: '/assets/professores/jonas-portrait.jpeg',
+    image: '/assets/professores/jonas-portrait.webp',
     alt: 'Professor Jonas Santos',
     crop: 'crop-jonas',
     formation: 'Técnico em mecânica, tecnólogo em mecatrônica e especialista em diagnóstico automotivo avançado.',
@@ -773,7 +792,7 @@ const teachers = [
     name: 'Marlon Wagner Hey',
     specialty: 'Especialista em gestão técnica, testes veiculares e Honda',
     shortSpecialty: 'Gestão técnica e Honda',
-    image: '/assets/professores/marlon-portrait.jpeg',
+    image: '/assets/professores/marlon-portrait.webp',
     alt: 'Professor Marlon Wagner Hey',
     crop: 'crop-marlon',
     formation: 'Profissional do setor automotivo desde 2002, com trajetória em montadoras e concessionárias.',
@@ -787,7 +806,7 @@ const teachers = [
     name: 'André Luiz da Silva',
     specialty: 'Especialista em mecânica prática e rotina de oficina',
     shortSpecialty: 'Mecânica prática',
-    image: '/assets/professores/andre-portrait.jpeg',
+    image: '/assets/professores/andre-portrait.webp',
     alt: 'Professor André Luiz da Silva',
     crop: 'crop-andre',
     formation: 'Mais de 40 anos no setor de mecânica, com início aos 12 anos realizando reparos em motocicletas.',
@@ -801,7 +820,7 @@ const teachers = [
     name: 'Silas Arantes',
     specialty: 'Especialista em mecânica de veículos e injeção para iniciantes',
     shortSpecialty: 'Mecânica e injeção inicial',
-    image: '/assets/professores/silas-portrait.jpeg',
+    image: '/assets/professores/silas-portrait.webp',
     alt: 'Professor Silas Arantes',
     crop: 'crop-silas',
     formation:
@@ -816,7 +835,7 @@ const teachers = [
     name: 'Sylvio Bove',
     specialty: 'Especialista em sistemas elétricos e montagem técnica de motores',
     shortSpecialty: 'Elétrica e motores',
-    image: '/assets/professores/sylvio-portrait.jpeg',
+    image: '/assets/professores/sylvio-portrait.webp',
     alt: 'Professor Sylvio Bove',
     crop: 'crop-sylvio',
     formation: 'Técnico em reparação automotiva, com sólida experiência em sistemas elétricos e injeção eletrônica.',
@@ -855,6 +874,16 @@ function Header({ isSubPage = false, isTeachersPage = false, whatsappContext }) 
             {item}
           </a>
         ))}
+        <a
+          className="nav-cta"
+          href={getWhatsappHref(whatsappContext)}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => setOpen(false)}
+        >
+          <WhatsappLogo size={18} weight="bold" aria-hidden="true" />
+          Falar com a equipe
+        </a>
       </nav>
       <a className="header-cta" href={getWhatsappHref(whatsappContext)} target="_blank" rel="noreferrer">
         Falar com a equipe
@@ -877,7 +906,7 @@ function Hero() {
   return (
     <section className="hero" id="top">
       <div className="hero-media" aria-hidden="true">
-        <img src="/assets/hero-workshop.png" alt="" fetchPriority="high" />
+        <img {...heroSrcSet('/assets/hero-workshop.png')} alt="" fetchPriority="high" />
       </div>
       <div className="hero-content">
         <h1>
@@ -936,7 +965,7 @@ function CommunityIntro() {
       <div className="audience-grid">
         {audiences.map((audience) => (
           <article className="audience-card" key={audience.title}>
-            <img src={audience.image} alt="" loading="lazy" />
+            <img src={cardSrc(audience.image)} alt="" loading="lazy" />
             <div>
               <h3>{audience.title}</h3>
               <p>{audience.text}</p>
@@ -952,7 +981,6 @@ function RoutesSection() {
   return (
     <section className="route-section" id="rotas">
       <div className="section-head centered dark">
-        <p className="section-kicker">A rota que te leva mais longe</p>
         <h2>Aprender. Conectar. Evoluir. Trabalhar.</h2>
       </div>
       <div className="route-line">
@@ -982,7 +1010,6 @@ function CoursesSection() {
   return (
     <section className="courses-section" id="cursos">
       <div className="courses-copy">
-        <p className="section-kicker">Cursos e workshops</p>
         <h2>
           Aprenda na prática.
           <span>Aplique na oficina.</span>
@@ -1012,7 +1039,7 @@ function CoursesSection() {
       <div className="course-grid">
         {filtered.map((course) => (
           <article className="course-card" key={course.title}>
-            <img src={course.image} alt="" loading="lazy" />
+            <img src={cardSrc(course.image)} alt="" loading="lazy" />
             <div className="course-body">
               <span>{course.type}</span>
               <h3>{course.title}</h3>
@@ -1061,7 +1088,6 @@ function WorkshopsSection() {
   return (
     <section className="workshops-section" id="workshops">
       <div className="section-head">
-        <p className="section-kicker">Workshops da Rota</p>
         <h2>Conteúdo atual. Aplicação imediata.</h2>
         <p>
           Sem enrolação. Sem excesso de teoria. Direto ao que o mercado precisa hoje.
@@ -1083,7 +1109,6 @@ function TeachersHomeSection() {
   return (
     <section className="teachers-home" id="professores-home">
       <div className="section-head dark">
-        <p className="section-kicker">Professores da Rota</p>
         <h2>
           Quem ensina
           <span>vive a oficina.</span>
@@ -1142,7 +1167,11 @@ function CommunitySection() {
           </div>
         </div>
       </div>
-      <img src="/assets/community-workshop.png" alt="Grupo da Rota do Mecânico em oficina técnica" loading="lazy" />
+      <img
+        {...heroSrcSet('/assets/community-workshop.png')}
+        alt="Grupo da Rota do Mecânico em oficina técnica"
+        loading="lazy"
+      />
     </section>
   );
 }
@@ -1151,7 +1180,6 @@ function PartnersSection() {
   return (
     <section className="partners-section" id="parceiros">
       <div>
-        <p className="section-kicker">Parceiros e prova de realidade</p>
         <h2>Fazem parte da Rota</h2>
         <p>
           Oficinas e empresas que acreditam na formação de profissionais cada vez mais
@@ -1261,7 +1289,7 @@ function CoursePage({ course, whatsappContext }) {
       <main id="main-content">
         <section className="landing-hero">
           <div className="landing-hero-media" aria-hidden="true">
-            <img src={course.image} alt="" fetchPriority="high" />
+            <img {...heroSrcSet(course.image)} alt="" fetchPriority="high" />
           </div>
           <div className="landing-hero-content">
             <a className="back-link" href="/#cursos">
@@ -1302,7 +1330,6 @@ function CoursePage({ course, whatsappContext }) {
 
         <section className="landing-intro">
           <div className="section-head">
-            <p className="section-kicker">O problema</p>
             <h2>
               {course.problemTitle[0]}
               <span>{course.problemTitle[1]}</span>
@@ -1317,7 +1344,6 @@ function CoursePage({ course, whatsappContext }) {
 
         <section className="landing-dark-band">
           <div className="section-head dark">
-            <p className="section-kicker">A solução da Rota</p>
             <h2>
               {course.solutionTitle[0]}
               <span>{course.solutionTitle[1]}</span>
@@ -1335,7 +1361,6 @@ function CoursePage({ course, whatsappContext }) {
 
         <section className="landing-audience">
           <div className="section-head centered">
-            <p className="section-kicker">Para quem é</p>
             <h2>
               {course.audienceTitle[0]}
               <span>{course.audienceTitle[1]}</span>
@@ -1374,9 +1399,12 @@ function CoursePage({ course, whatsappContext }) {
         </section>
 
         <section className="landing-practice">
-          <img src={course.practiceImage} alt="Aula prática da Rota do Mecânico em oficina" />
+          <img
+            {...heroSrcSet(course.practiceImage)}
+            alt="Aula prática da Rota do Mecânico em oficina"
+            loading="lazy"
+          />
           <div>
-            <p className="section-kicker">Como funciona na prática</p>
             <h2>
               {course.practiceTitle[0]}
               <span>{course.practiceTitle[1]}</span>
@@ -1406,7 +1434,6 @@ function CoursePage({ course, whatsappContext }) {
         {teacher && (
           <section className="landing-teacher">
             <div>
-              <p className="section-kicker">Professor</p>
               <h2>
                 {teacher.name}
                 <span>{course.teacherTagline}</span>
@@ -1420,7 +1447,7 @@ function CoursePage({ course, whatsappContext }) {
                 ))}
               </div>
             </div>
-            <img className={`teacher-photo ${teacher.crop}`} src={teacher.image} alt={teacher.alt} />
+            <img className={`teacher-photo ${teacher.crop}`} src={teacher.image} alt={teacher.alt} loading="lazy" />
           </section>
         )}
 
@@ -1557,7 +1584,6 @@ function TeachersPage({ whatsappContext }) {
 
         <section className="teacher-model">
           <div className="section-head centered">
-            <p className="section-kicker">Modelo de formação</p>
             <h2>
               Experiência de mercado
               <span>organizada para a prática.</span>
@@ -1588,7 +1614,6 @@ function TeachersPage({ whatsappContext }) {
 
         <section className="teachers-directory" id="perfis">
           <div className="section-head">
-            <p className="section-kicker">Corpo docente</p>
             <h2>
               Especialistas
               <span>da Rota do Mecânico.</span>
@@ -1597,12 +1622,12 @@ function TeachersPage({ whatsappContext }) {
           <div className="teacher-profile-list">
             {teachers.map((teacher) => (
               <article className="teacher-profile" key={teacher.name}>
-                <img className={`teacher-photo ${teacher.crop}`} src={teacher.image} alt={teacher.alt} />
+                <img className={`teacher-photo ${teacher.crop}`} src={teacher.image} alt={teacher.alt} loading="lazy" />
                 <div className="teacher-profile-body">
-                  <p className="teacher-specialty">
+                  <h3 className="teacher-specialty">
                     <span className="teacher-name-mark">Professor {teacher.name}</span>
                     <span className="teacher-teaches">{teacher.specialty.toLowerCase()}.</span>
-                  </p>
+                  </h3>
                   <p>{teacher.formation}</p>
                   <p>{teacher.experience}</p>
                   <p>{teacher.contribution}</p>
@@ -1659,13 +1684,12 @@ function CoursesIndexPage({ whatsappContext }) {
       <main id="main-content">
         <section className="landing-hero catalog-hero">
           <div className="landing-hero-media" aria-hidden="true">
-            <img src="/assets/course-diagnostics.png" alt="" fetchPriority="high" />
+            <img {...heroSrcSet('/assets/course-diagnostics.png')} alt="" fetchPriority="high" />
           </div>
           <div className="landing-hero-content">
             <a className="back-link" href="/">
               Início
             </a>
-            <p className="section-kicker">Cursos e workshops</p>
             <h1>
               Escolha sua
               <span>próxima rota.</span>
