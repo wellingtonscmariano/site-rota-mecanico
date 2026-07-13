@@ -20,6 +20,10 @@
   --ink-on-gold: #090806;
   --shadow: 0 26px 70px rgba(0, 0, 0, 0.32);
   --section-x: clamp(20px, 7vw, 104px);
+  /* Teto de largura do conteúdo. Fundos seguem full-bleed; só o conteúdo trava e centraliza. */
+  --content-max: 1600px;
+  /* Padding lateral que vira "gutter de centragem" quando a viewport passa de --content-max. Abaixo disso, == --section-x. */
+  --gutter: max(var(--section-x), calc((100% - var(--content-max)) / 2));
   font-family: Inter, system-ui, sans-serif;
 }
 
@@ -204,7 +208,8 @@ img {
 
 .hero {
   position: relative;
-  min-height: 730px;
+  /* Cresce a altura em telas largas p/ a foto (16:9) não virar uma faixa fina. Idêntico ao original até ~2030px. */
+  min-height: clamp(730px, 36vw, 1040px);
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -240,7 +245,7 @@ img {
   position: relative;
   z-index: 1;
   width: min(620px, calc(100% - 40px));
-  margin-left: clamp(20px, 9vw, 136px);
+  margin-left: var(--gutter);
   margin-bottom: 144px;
 }
 
@@ -335,7 +340,7 @@ section {
 
 .light-section,
 .faq-section {
-  padding: 72px var(--section-x) 82px;
+  padding: 72px var(--gutter) 82px;
 }
 
 .section-head {
@@ -443,7 +448,7 @@ h2 span {
 }
 
 .route-section {
-  padding: 78px var(--section-x) 88px;
+  padding: 78px var(--gutter) 88px;
   background:
     radial-gradient(circle at top, rgba(214, 162, 58, 0.18), transparent 26%),
     linear-gradient(180deg, var(--void-2), var(--black));
@@ -510,7 +515,7 @@ h2 span {
   display: grid;
   grid-template-columns: 0.85fr 1.6fr;
   gap: clamp(28px, 5vw, 70px);
-  padding: 82px var(--section-x);
+  padding: 82px var(--gutter);
 }
 
 .courses-copy {
@@ -644,7 +649,7 @@ h2 span {
   display: grid;
   grid-template-columns: 0.95fr 1.35fr;
   gap: clamp(30px, 6vw, 90px);
-  padding: 84px var(--section-x);
+  padding: 84px var(--gutter);
   background: var(--void-2);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -686,7 +691,7 @@ h2 span {
   grid-template-columns: 0.72fr 1.28fr;
   gap: clamp(30px, 5vw, 72px);
   align-items: center;
-  padding: 84px var(--section-x);
+  padding: 84px var(--gutter);
   background:
     radial-gradient(circle at 84% 12%, rgba(214, 162, 58, 0.18), transparent 28%),
     linear-gradient(180deg, var(--void-3), var(--void-2));
@@ -778,7 +783,7 @@ h2 span {
   gap: clamp(34px, 6vw, 86px);
   align-items: center;
   min-height: 720px;
-  padding: 140px var(--section-x) 84px;
+  padding: 140px var(--gutter) 84px;
   background:
     radial-gradient(circle at 78% 16%, rgba(214, 162, 58, 0.18), transparent 30%),
     linear-gradient(180deg, var(--void-3), var(--black));
@@ -831,7 +836,7 @@ h2 span {
 }
 
 .teacher-model {
-  padding: 78px var(--section-x);
+  padding: 78px var(--gutter);
   background:
     radial-gradient(circle at top left, rgba(214, 162, 58, 0.14), transparent 30%),
     var(--paper);
@@ -877,7 +882,7 @@ h2 span {
 }
 
 .teachers-directory {
-  padding: 86px var(--section-x);
+  padding: 86px var(--gutter);
   background: var(--void-2);
 }
 
@@ -1004,7 +1009,7 @@ h2 span {
 .community-content {
   position: relative;
   z-index: 1;
-  padding: 70px var(--section-x);
+  padding: 70px var(--gutter);
 }
 
 .community-content h2 {
@@ -1045,7 +1050,7 @@ h2 span {
   grid-template-columns: 0.72fr 1.28fr;
   align-items: start;
   gap: 48px;
-  padding: 72px var(--section-x);
+  padding: 72px var(--gutter);
 }
 
 .partners-section h2 {
@@ -1134,7 +1139,7 @@ h2 span {
   grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.72fr);
   gap: clamp(28px, 6vw, 86px);
   align-items: end;
-  padding: 76px var(--section-x);
+  padding: 76px var(--gutter);
   background:
     linear-gradient(90deg, rgba(5, 5, 5, 0.94), rgba(5, 5, 5, 0.72)),
     url('/assets/hero-workshop-1600.webp') center / cover;
@@ -1254,10 +1259,10 @@ h2 span {
 .landing-hero {
   position: relative;
   display: grid;
-  min-height: 760px;
+  min-height: clamp(760px, 36vw, 1060px);
   align-items: end;
   overflow: hidden;
-  padding: 132px var(--section-x) 134px;
+  padding: 132px var(--gutter) 134px;
   background: var(--black);
 }
 
@@ -1344,9 +1349,9 @@ h2 span {
 .landing-proof {
   position: absolute;
   z-index: 2;
-  right: var(--section-x);
+  right: var(--gutter);
   bottom: 0;
-  left: var(--section-x);
+  left: var(--gutter);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border: 1px solid rgba(214, 162, 58, 0.22);
@@ -1398,7 +1403,7 @@ h2 span {
   display: grid;
   grid-template-columns: 0.72fr 1.28fr;
   gap: clamp(30px, 6vw, 86px);
-  padding: 82px var(--section-x);
+  padding: 82px var(--gutter);
 }
 
 .landing-copy p,
@@ -1421,7 +1426,7 @@ h2 span {
   grid-template-columns: 0.82fr 1.18fr;
   gap: clamp(30px, 5vw, 72px);
   align-items: center;
-  padding: 78px var(--section-x);
+  padding: 78px var(--gutter);
   background:
     radial-gradient(circle at 82% 14%, rgba(214, 162, 58, 0.16), transparent 30%),
     linear-gradient(180deg, var(--void-3), var(--black));
@@ -1460,7 +1465,7 @@ h2 span {
 }
 
 .landing-audience {
-  padding: 78px var(--section-x) 84px;
+  padding: 78px var(--gutter) 84px;
 }
 
 .landing-list-grid {
@@ -1493,7 +1498,7 @@ h2 span {
   display: grid;
   grid-template-columns: 0.72fr 1.28fr;
   gap: clamp(30px, 6vw, 86px);
-  padding: 84px var(--section-x);
+  padding: 84px var(--gutter);
 }
 
 .module-list {
@@ -1541,7 +1546,7 @@ h2 span {
   grid-template-columns: 0.9fr 1.1fr;
   gap: clamp(30px, 5vw, 76px);
   align-items: center;
-  padding: 84px var(--section-x);
+  padding: 84px var(--gutter);
   background: var(--void-2);
 }
 
@@ -1594,7 +1599,7 @@ h2 span {
   grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
   gap: clamp(30px, 5vw, 76px);
   align-items: center;
-  padding: 84px var(--section-x);
+  padding: 84px var(--gutter);
   background:
     radial-gradient(circle at top left, rgba(214, 162, 58, 0.16), transparent 28%),
     linear-gradient(180deg, var(--void-3), var(--void-2));
@@ -1664,7 +1669,7 @@ h2 span {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 28px;
   align-items: center;
-  padding: 74px var(--section-x);
+  padding: 74px var(--gutter);
   background:
     linear-gradient(90deg, rgba(5, 5, 5, 0.94), rgba(5, 5, 5, 0.72)),
     url('/assets/community-workshop-1600.webp') center / cover;
@@ -1679,7 +1684,7 @@ h2 span {
   grid-template-columns: 1fr 420px;
   gap: 44px;
   align-items: center;
-  padding: 80px var(--section-x);
+  padding: 80px var(--gutter);
   background:
     linear-gradient(90deg, rgba(5, 5, 5, 0.94), rgba(5, 5, 5, 0.72)),
     url('/assets/community-workshop-1600.webp') center / cover;
