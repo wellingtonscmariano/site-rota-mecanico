@@ -83,7 +83,7 @@ const courses = [
     level: 'Intermediário',
     format: 'Presencial e prático',
     category: 'workshop',
-    image: '/assets/course-diagnostics.png',
+    image: '/assets/hero-workshop.png',
     href: '/workshops/diagnostico-avancado',
     text: 'Método, scanner, multímetro e osciloscópio aplicados a falhas reais.',
   },

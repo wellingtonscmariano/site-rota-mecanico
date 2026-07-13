@@ -249,7 +249,7 @@ img {
   font-family: Oswald, Impact, sans-serif;
   font-size: clamp(86px, 13vw, 190px);
   font-weight: 700;
-  line-height: 0.86;
+  line-height: 0.94;
   text-transform: uppercase;
   color: var(--paper-bright);
   text-shadow: 0 5px 0 rgba(0, 0, 0, 0.5), 0 22px 50px rgba(0, 0, 0, 0.42);
@@ -559,6 +559,8 @@ h2 span {
 }
 
 .course-card {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--line-dark);
   border-radius: 8px;
@@ -579,6 +581,9 @@ h2 span {
 }
 
 .course-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 20px;
 }
 
@@ -625,6 +630,7 @@ h2 span {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  margin-top: auto;
   min-height: 44px;
   border-radius: 5px;
   background: var(--gold);
@@ -785,7 +791,7 @@ h2 span {
   font-family: Oswald, Impact, sans-serif;
   font-size: clamp(62px, 7vw, 112px);
   font-weight: 700;
-  line-height: 0.9;
+  line-height: 0.94;
   text-transform: uppercase;
   text-shadow: 0 4px 0 rgba(138, 91, 31, 0.46), 0 20px 54px rgba(0, 0, 0, 0.36);
 }
@@ -1315,7 +1321,7 @@ h2 span {
   font-family: Oswald, Impact, sans-serif;
   font-size: clamp(52px, 7vw, 108px);
   font-weight: 700;
-  line-height: 0.92;
+  line-height: 0.94;
   text-transform: uppercase;
   text-shadow: 0 4px 0 rgba(0, 0, 0, 0.5), 0 22px 50px rgba(0, 0, 0, 0.42);
 }
